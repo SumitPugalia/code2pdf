@@ -1,0 +1,18 @@
+<div>
+  <%= button "Browse", to: page_path(@conn, :browse), class: "btn btn-outline-primary", id: "browse"%>
+  <%= form_for @conn, page_path(@conn, :browse), [multipart: true], fn f -> %>
+  <div class="form-group">
+    <label>BROWSE</label>
+    <%= file_input f, :file, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= text_input f, :github_url, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
+
