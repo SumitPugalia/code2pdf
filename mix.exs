@@ -41,8 +41,7 @@ defmodule Code2pdf.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       # {:cowboy, "~> 1.0"},
-      {:plug_cowboy, "~> 1.0"},
-      {:git_cli, "~> 0.2"}
+      {:plug_cowboy, "~> 1.0"}
     ]
   end
 

@@ -6,9 +6,6 @@ defmodule Code2pdfWeb.PageController do
   end
 
   def browse(conn, %{"github_url" => url}) do
-  	IO.puts "++++++++++++++++++++++++++++"
-  	IO.inspect url
-  	IO.puts "++++++++++++++++++++++++++++"
   	folder = solve(url)
   	:ok = solve2(folder)
     redirect conn, to: page_path(conn, :index)
@@ -28,8 +25,9 @@ defmodule Code2pdfWeb.PageController do
 
   def solve2(folder) do
   	{:ok, result_file} = File.open(folder <> ".txt", [:append])
-  	:ok = generate_pdf([folder], result_file)
+  	:ok = generate_txt([folder], result_file)
   	File.close(result_file)
+  	generate_pdf(folder)
   end
 
   defp git!(args, into \\ "") do
@@ -39,11 +37,20 @@ defmodule Code2pdfWeb.PageController do
 	  end
 	end
 
-	def generate_pdf(folder, result_file) when is_list(folder) do
-		:ok = Enum.each(folder, fn file -> generate_pdf(get_all(file), result_file) end)
+	def generate_pdf(file) do
+		if cmd_path = System.find_executable("wkhtmltopdf") do
+			System.cmd(cmd_path, ["--encoding", "utf-8", file <> ".txt", file <> ".pdf"])
+			:ok
+		else
+			nil
+		end
 	end
 
-	def generate_pdf(file, result_file) do
+	def generate_txt(folder, result_file) when is_list(folder) do
+		:ok = Enum.each(folder, fn file -> generate_txt(get_all(file), result_file) end)
+	end
+
+	def generate_txt(file, result_file) do
 		{:ok, to_write} = File.read(file)
 	  IO.puts(result_file, <<"----------------------------------------------------------">>)
 	  IO.binwrite(result_file, file)
