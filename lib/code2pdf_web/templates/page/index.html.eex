@@ -13,6 +13,18 @@
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
+
+  <div>
+  <script>
+    function getfolder(e) {
+        var files = e.target.files;
+        var path = files[0].webkitRelativePath;
+        var Folder = path.split("/");
+        alert(Folder[0]);
+    }
+  </script>
+  <input type="file" id="update" onchange="getfolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+  </div>
 <% end %>
 </div>
 
