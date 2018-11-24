@@ -1,30 +1,26 @@
+<h3> Code2Pdf </h3> 
+
 <div>
-  <%= button "Browse", to: page_path(@conn, :browse), class: "btn btn-outline-primary", id: "browse"%>
-  <%= form_for @conn, page_path(@conn, :browse), [multipart: true], fn f -> %>
-  <div class="form-group">
-    <label>BROWSE</label>
-    <%= file_input f, :file, class: "form-control" %>
-  </div>
+  <%= form_for @conn, page_path(@conn, :convert), [multipart: true], fn f -> %>
+    <div class="form-group">
+      <%= text_input f, :github_url, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= text_input f, :github_url, class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
+  <%# <div>
+  #   <script>
+  #     function getfolder(e) {
+  #         var files = e.target.files;
+  #         var path = files[0].webkitRelativePath;
+  #         var Folder = path.split("/");
+  #         // alert(Folder[0]);
+  #     }
+  #   </script>
+  #   <input type="file" id="upload" onchange="getfolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple /> %>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
-
-  <div>
-  <script>
-    function getfolder(e) {
-        var files = e.target.files;
-        var path = files[0].webkitRelativePath;
-        var Folder = path.split("/");
-        alert(Folder[0]);
-    }
-  </script>
-  <input type="file" id="update" onchange="getfolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
-  </div>
-<% end %>
 </div>
 
