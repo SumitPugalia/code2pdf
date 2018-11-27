@@ -1,5 +1,6 @@
 <h3> Code2Pdf </h3> 
 
+    <button> Convert </button>
 <div>
   <%= form_for @conn, page_path(@conn, :convert), [multipart: true], fn f -> %>
     <div class="form-group">
@@ -11,6 +12,7 @@
     </div>
   <% end %>
   
+
   <%# <div>
   #   <script>
   #     function getfolder(e) {
