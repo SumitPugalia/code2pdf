@@ -1,18 +1,19 @@
 defmodule Code2pdfWeb.FileChannel do
   use Code2pdfWeb, :channel
 
-  def join("file:1", params, socket) do
-  	IO.puts "join"
-  	IO.inspect params
-    {:ok, %{test: "Joined"}, socket}
+  def join(topic, params, socket) do
+    {:ok, %{}, socket}
   end
 
-  def handle_in(name, params, socket) do
-  	IO.puts "handle_in"
-    IO.inspect params
+  def handle_in("file", %{"subtopic" => value, "url" => url}, socket) do
     #socket, name_of_event
     # make sure to watch this event
-    broadcast!(socket, "file:1:pressed", %{})
+    Code2pdf.Convert.process url
+    broadcast!(socket, "file:" <> value <> ":converted", %{})
     {:reply, :ok, socket}
+  end
+
+  def handle_in(topic, params, socket) do
+    IO.puts "unwanted event"
   end
 end
