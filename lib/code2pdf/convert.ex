@@ -1,5 +1,4 @@
 defmodule Code2pdf.Convert do  
-  @reject [~r{\/\.}, ~r{.png}, ~r{_build}, ~r{test}, ~r{deps}, ~r{assets}, ~r{.eex}, ~r{priv}]
   
   def process(url) do
     folder = clone(url)

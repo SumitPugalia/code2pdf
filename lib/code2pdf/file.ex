@@ -1,5 +1,5 @@
 defmodule Code2pdf.File do
-  @reject [~r{\/\.}, ~r{.png}, ~r{_build}, ~r{test}, ~r{deps}, ~r{assets}, ~r{.eex}, ~r{priv}]
+  @reject [~r{\/\.}, ~r{.png}, ~r{.jpeg}, ~r{_build}, ~r{test}, ~r{deps}, ~r{assets}, ~r{.eex}, ~r{.lock}, ~r{priv}]
 
   def generate(file) do
     {:ok, result_file} = File.open(file <> ".txt", [:append])
